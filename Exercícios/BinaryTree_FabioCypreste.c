@@ -6,7 +6,7 @@ typedef struct No{
   int dado;
   struct No *esquerda;
   struct No *direita;
-}No;
+} No;
 
 //Função para criação de nó de uma árvore binária
 No *createNo(int dado){
@@ -15,16 +15,16 @@ No *createNo(int dado){
     printf("Erro: Falha ao alocar memória para o novo nó.\n");
     exit(-1);
   }
-newNo->dado = dado;
-newNo->esquerda = NULL;
-newNo->direita = NULL;
-return newNo;
+  newNo->dado = dado;
+  newNo->esquerda = NULL;
+  newNo->direita = NULL;
+  return newNo;
 }
 
 //Função de inserção de um nó em uma árvore binária.
 No *insertNo(No *raiz, int dado){
   if (raiz == NULL){
-    raiz = criarNo(dado);
+    raiz = createNo(dado);
   }
   else{
     if (dado <= raiz->dado){
@@ -52,26 +52,25 @@ No *excludeNo(No *raiz, int dado){
   }
   if (dado < raiz->dado){
     raiz->esquerda = excludeNo(raiz->esquerda, dado);
-  else if (dado > raiz->dado){
+  } else if (dado > raiz->dado){
     raiz->direita = excludeNo(raiz->direita, dado);
-  else{
-    //
+  } else {
+    // Caso 1: Nó com apenas um filho ou nenhum
     if (raiz->esquerda == NULL){
       No *temp = raiz->direita;
       free(raiz);
       return temp;
     }
-    else if (raiz->direita == NULL)
-    {
+    else if (raiz->direita == NULL) {
       No *temp = raiz->esquerda;
       free(raiz);
       return temp;
     }
-    
-  // Caso 2: Nó com dois filhos, é encontrado o sucessor in-order;
+
+    // Caso 2: Nó com dois filhos, é encontrado o sucessor in-order;
     No *temp = findMinNo(raiz->direita);
     raiz->dado = temp->dado;
-    raiz->direita = excluirNo(raiz->direita, temp->dado);
+    raiz->direita = excludeNo(raiz->direita, temp->dado);
   }
   return raiz;
 }
@@ -81,7 +80,7 @@ No *searchNo(No *raiz, int dado){
   if (raiz == NULL || raiz->dado == dado){
     return raiz;
   }
-  if (dados < raiz->dado){
+  if (dado < raiz->dado){
     return searchNo(raiz->esquerda, dado);
   }
   return searchNo(raiz->direita, dado);
@@ -112,15 +111,22 @@ int main(){
 
   //Encontrando o menor valor da árvore binária:
   printf("Encontro do menor valor da árvore binária pela função findMinNo(): \n");
-  findMinNo(raiz);
+  No *minNo = findMinNo(raiz);
+  if (minNo != NULL) {
+    printf("Menor valor: %d\n", minNo->dado);
+  }
 
   //Impressão da árvore binária
-  printf("Árvore binária sendo criada pela função PrintTree(): \n")
+  printf("Árvore binária sendo criada pela função PrintTree(): \n");
   printTree(raiz, 0);
 
   //Deleção de um valor na árvore binária
-  printf("Exclusão no nó com valor 4 da árvore binária.";
-  excludeNo(raiz, 4);
+  printf("Exclusão do nó com valor 4 da árvore binária.\n");
+  raiz = excludeNo(raiz, 4);
+
+  //Impressão da árvore após exclusão
+  printf("Árvore após exclusão do nó com valor 4:\n");
+  printTree(raiz, 0);
 
   return 0;
-  }
+}
