@@ -124,17 +124,37 @@ int main(){
     printf("Menor valor: %d\n", minNo->dado);
   }
 
+  //Encontro de um valor existente e um existente na árvore binária
+  int valor = 23;
+  for (i=0;i = 1; i++){
+    if (searchNo(raiz, valor) == NULL){
+      printf("Valor %d não encontrado na árvore binária.", valor);
+    }
+    else{
+      printf("Valor %d encontrado.", valor);
+    }
+    int valor += 7;
+  }
+  
   //Impressão da árvore binária
   printf("Árvore binária sendo criada pela função PrintTree(): \n");
   printTree(raiz, 0);
 
   //Deleção de um valor na árvore binária
+  int valor = 15;
   printf("Exclusão do nó com valor 15 da árvore binária.\n");
-  raiz = excludeNo(raiz, 15);
+  raiz = excludeNo(raiz, valor);
 
   //Impressão da árvore após exclusão
-  printf("Árvore após exclusão do nó com valor 15:\n");
+  printf("Árvore após exclusão do nó:\n");
   printTree(raiz, 0);
 
+  //Inserção de um valor na árvore binaria
+  int valor = 80;
+  insertNo(raiz, valor);
+
+  //Impressão da árvore após inserção
+  printf("Árvore após inserção do nó:\n");
+  printTree(raiz, 0);
   return 0;
 }
