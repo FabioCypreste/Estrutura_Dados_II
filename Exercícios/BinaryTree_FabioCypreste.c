@@ -125,15 +125,16 @@ int main(){
   }
 
   //Encontro de um valor existente e um existente na árvore binária
+  int i;
   int valor = 23;
-  for (i=0;i = 1; i++){
+  for (i=0;i <= 1; i++){
     if (searchNo(raiz, valor) == NULL){
-      printf("Valor %d não encontrado na árvore binária.", valor);
+      printf("Valor %d não encontrado na árvore binária. \n", valor);
     }
     else{
-      printf("Valor %d encontrado.", valor);
+      printf("Valor %d encontrado. \n", valor);
     }
-    int valor += 7;
+    valor = valor + 7;
   }
   
   //Impressão da árvore binária
@@ -141,7 +142,7 @@ int main(){
   printTree(raiz, 0);
 
   //Deleção de um valor na árvore binária
-  int valor = 15;
+  valor = 15;
   printf("Exclusão do nó com valor 15 da árvore binária.\n");
   raiz = excludeNo(raiz, valor);
 
@@ -150,7 +151,7 @@ int main(){
   printTree(raiz, 0);
 
   //Inserção de um valor na árvore binaria
-  int valor = 80;
+  valor = 80;
   insertNo(raiz, valor);
 
   //Impressão da árvore após inserção
