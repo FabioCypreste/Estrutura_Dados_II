@@ -102,6 +102,7 @@ void printTree(No *raiz, int profundidade){
   for(int i = 0; i < profundidade; i++){
     printf("  ");
   }
+  
   printf("%d\n", raiz->dado);
   printTree(raiz->esquerda, profundidade + 1);
 }
