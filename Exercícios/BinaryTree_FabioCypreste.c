@@ -11,13 +11,16 @@ typedef struct No{
 //Função para criação de nó de uma árvore binária
 No *createNo(int dado){
   No *newNo = (No*)malloc(sizeof(No));
+  
   if (newNo == NULL){
     printf("Erro: Falha ao alocar memória para o novo nó.\n");
     exit(-1);
   }
+  
   newNo->dado = dado;
   newNo->esquerda = NULL;
   newNo->direita = NULL;
+  
   return newNo;
 }
 
@@ -34,6 +37,7 @@ No *insertNo(No *raiz, int dado){
       raiz->direita = insertNo(raiz->direita, dado);
     }
   }
+  
   return raiz;
 }
 
@@ -42,6 +46,7 @@ No *findMinNo(No *raiz){
   while (raiz->esquerda != NULL) {
     raiz = raiz->esquerda;
   }
+  
   return raiz;
 }
 
@@ -50,18 +55,20 @@ No *excludeNo(No *raiz, int dado){
   if (raiz == NULL){
     return raiz;
   }
-  if (dado < raiz->dado){
+  else if (dado < raiz->dado){
     raiz->esquerda = excludeNo(raiz->esquerda, dado);
-  } else if (dado > raiz->dado){
+  } 
+  else if (dado > raiz->dado){
     raiz->direita = excludeNo(raiz->direita, dado);
-  } else {
+  } 
+  else{
     // Caso 1: Nó com apenas um filho ou nenhum
     if (raiz->esquerda == NULL){
       No *temp = raiz->direita;
       free(raiz);
       return temp;
     }
-    else if (raiz->direita == NULL) {
+    else if (raiz->direita == NULL){
       No *temp = raiz->esquerda;
       free(raiz);
       return temp;
@@ -121,11 +128,11 @@ int main(){
   printTree(raiz, 0);
 
   //Deleção de um valor na árvore binária
-  printf("Exclusão do nó com valor 4 da árvore binária.\n");
-  raiz = excludeNo(raiz, 4);
+  printf("Exclusão do nó com valor 15 da árvore binária.\n");
+  raiz = excludeNo(raiz, 15);
 
   //Impressão da árvore após exclusão
-  printf("Árvore após exclusão do nó com valor 4:\n");
+  printf("Árvore após exclusão do nó com valor 15:\n");
   printTree(raiz, 0);
 
   return 0;
