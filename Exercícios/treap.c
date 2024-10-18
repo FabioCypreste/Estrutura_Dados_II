@@ -9,7 +9,6 @@ typedef struct No {
     int peso;
 } No;
 
-// Função para criar um novo nó
 No* newNo(int valor, int peso) {
     No* no = (No*)malloc(sizeof(No));
     if (node == NULL) {
@@ -103,4 +102,28 @@ void exibirEmOrdem(No* raiz) {
     }
 }
 
+int main()
+{
+    struct No *raiz = NULL;
 
+    inserir(&raiz, 10);
+    inserir(&raiz, 22);
+    inserir(&raiz, 46);
+    inserir(&raiz, 13);
+    inserir(&raiz, 12);
+    inserir(&raiz, 2);
+    
+    printf("Árvore Treap: \n");
+    exibirEmOrdem(raiz);
+    
+    int valorBuscado = 59;
+    No *resultado = buscar(raiz, valorBuscado);
+    
+    if (resultado != NULL) {
+        printf("Valor %d encontrado, peso: %s\n", resultado->valor, resultado->peso;
+    } else {
+        printf("Valor %d não encontrado.\n", valorBuscado);
+    }
+
+    return 0;
+}
